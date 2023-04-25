@@ -54,6 +54,11 @@ func (lk *LogKafka) SendKafkaMessage(topic string, message string) bool {
 }
 
 func InitLogger(mode string, enableKafka bool, kafkaAddress string, topic string) error {
+	//测试环境不输出日志到kfaka
+	if mode == "test" {
+		Logger = zap.NewNop()
+		return nil
+	}
 	// 打印错误级别的日志
 	highPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
 		return lvl >= zapcore.InfoLevel
@@ -101,6 +106,7 @@ func InitLogger(mode string, enableKafka bool, kafkaAddress string, topic string
 
 		}
 		allCore = append(allCore, kafkaCore)
+
 	}
 	if mode == "debug" {
 		allCore = append(allCore, zapcore.NewCore(consoleEncoder, consoleDebugging, lowPriority))

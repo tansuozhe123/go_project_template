@@ -3,38 +3,47 @@ package controller
 import (
 	"net/http"
 
-	"go_project_template/api/v1/web/dto"
-	"go_project_template/internal/pkg/apires"
+	"go_project/api/v1/web/dto"
+	"go_project/internal/service"
+	"go_project/pkg/commonres"
+	"go_project/pkg/logger"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
+	"go.uber.org/zap"
 )
 
 type ProductCtroller struct {
+	ProductService service.ProductServiceInf
 }
 
 var ProductCtrl *ProductCtroller
 
 func init() {
-	ProductCtrl = &ProductCtroller{}
+	ProductCtrl = &ProductCtroller{
+		ProductService: service.ProductSvc,
+	}
+
 }
 
-// @Summary 测试
+// @Summary 获取单个产品
 // @Tags 产品
-// @Description 测试
+// @Description 获取单个产品
 // @Produce json
 // @Param username query string true "用户名"
 // @Success 200 {object} 	dtos.ApiRes "成功"
-// @Router /product/ [get]
-func (ctrl *ProductCtroller) GetProduct(c *gin.Context) {
-	var req dto.GetProductReq
+// @Router /product/one [get]
+func (ctrl *ProductCtroller) GetOneProduct(c *gin.Context) {
+	var req dto.GetOneProductReq
 	if err := c.ShouldBindQuery(&req); err != nil {
-		logrus.Infoln(err)
-		c.JSON(http.StatusCreated, apires.NormalSucess)
+		logger.Logger.Error("参数错误", zap.Error(err))
+		c.JSON(http.StatusCreated, commonres.ParameterFormattedError)
 		return
 	}
-	logrus.Infoln(req.Username)
+	logger.Logger.Info("参数", zap.Any("req", req))
+	//调用service
+	res := ctrl.ProductService.GetOneProduct(req)
 
 	//返回结果
-	c.JSON(http.StatusOK, apires.NormalSucess)
+	c.JSON(http.StatusOK, res)
+
 }

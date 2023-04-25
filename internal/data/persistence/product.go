@@ -1,21 +1,44 @@
 package persistence
 
 import (
-	"go_project_template/internal/biz"
+	"go_project/internal/biz/entity"
+	"go_project/internal/conf"
 
+	"go_project/pkg/logger"
+	mongodb "go_project/pkg/mongo"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"gorm.io/gorm"
 )
 
-type ProductRepo struct {
-	db *gorm.DB
+//go:generate mockgen -destination=../../../mocks/product_persitence_mock.go -package=mocks go_project/internal/data/persistence ProductPersitenceInf
+
+type ProductPersitenceInf interface {
+	GetOneProduct(productkey string) (*entity.Product, error)
+}
+type ProductPersitence struct {
+	MySQlDb *gorm.DB
+	MongoDb *mongodb.MongoClient
 }
 
-func NewProductRepo(db *gorm.DB) biz.ProductRepo {
-	return &ProductRepo{
-		db: db,
-	}
+var ProductPersi = &ProductPersitence{
+	MySQlDb: &conf.GetEnv().MySQLCli,
+	MongoDb: &conf.GetEnv().MongoCli,
 }
-func (PR *ProductRepo) GetProductByIds(ids []string) ([]biz.Product, error) {
-	PR.db.Where("id in (?)", ids).Find(&biz.Product{})
-	return []biz.Product{}, nil
+
+func (model *ProductPersitence) GetOneProduct(productkey string) (*entity.Product, error) {
+	var val entity.Product
+	ret, err := model.MongoDb.FindOne("product", bson.M{"productkey": productkey})
+	if err == mongo.ErrNoDocuments {
+		return nil, nil
+	}
+	if err != nil {
+		logger.Logger.Sugar().Error("find product err:", err)
+		return nil, err
+	}
+	if err := ret.Decode(&val); err != nil {
+		logger.Logger.Sugar().Error("decode product err:", err)
+	}
+	return &val, nil
 }

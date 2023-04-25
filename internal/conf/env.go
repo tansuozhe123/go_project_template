@@ -2,7 +2,10 @@ package conf
 
 import (
 	"fmt"
+	mongodb "go_project/pkg/mongo"
 	"os"
+
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 var (
@@ -21,7 +24,16 @@ var (
 			KafkaAddress: "127.0.0.1:9092",
 		},
 		EnableKafka: true,
-		LogTopic:    "product",
+		MongoCfg: mongodb.MongoDBConfig{
+			DbConnectName: "dbproduct",
+			DbUser:        "user",
+			DbPass:        "123456",
+			DbHost:        "127.0.0.1:27017",
+			DbName:        "product",
+			ClientOptions: options.Client().SetDirect(true),
+		},
+
+		LogTopic: "product",
 		Data: &Data{
 			Database: &Data_Database{
 				Driver: "mysql", // 数据库类型
@@ -56,6 +68,14 @@ func init() {
 					Source: fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=%s&loc=%s", os.Getenv("MYSQL_USERNAME"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_HOST"), os.Getenv("MYSQL_PORT"),
 						os.Getenv("MYSQL_DATABASENAME"), os.Getenv("MYSQL_CHARSET"), os.Getenv("MYSQL_PARSETIME"), os.Getenv("MYSQL_LOC")),
 				},
+			},
+			MongoCfg: mongodb.MongoDBConfig{
+				DbConnectName: os.Getenv("MONGO_CONNECT_NAME"),
+				DbUser:        os.Getenv("MONGO_USER"),
+				DbPass:        os.Getenv("MONGO_PASS"),
+				DbHost:        os.Getenv("MONGO_HOST"),
+				DbName:        os.Getenv("MONGO_DBNAME"),
+				ClientOptions: options.Client().SetDirect(true),
 			},
 		}
 	}

@@ -1,5 +1,11 @@
 package conf
 
+import (
+	mongodb "go_project/pkg/mongo"
+
+	"gorm.io/gorm"
+)
+
 type Data struct {
 	Database *Data_Database `json:"database,omitempty"`
 }
@@ -21,9 +27,13 @@ type KafkaConfig struct {
 	KafkaAddress string `json:"kafkaaddress"` // kafka地址
 }
 type Env struct {
-	MySQLConfig *MySQLConfig `json:"mysqlconfig"`
-	KafkaConfig *KafkaConfig `json:"kafkaconfig"`
-	LogTopic    string       `json:"logtopic"`
-	EnableKafka bool         `json:"enablekafka"`
-	Data        *Data        `json:"data"`
+	MySQLConfig *MySQLConfig          `json:"mysqlconfig"`
+	KafkaConfig *KafkaConfig          `json:"kafkaconfig"`
+	LogTopic    string                `json:"logtopic"`
+	EnableKafka bool                  `json:"enablekafka"`
+	Data        *Data                 `json:"data"`
+	MongoCfg    mongodb.MongoDBConfig `json:"mongocfg"`
+	MySQLCli    gorm.DB               `json:"mysqlcli"`
+	MongoCli    mongodb.MongoClient   `json:"mongocli"`
+	MongoInf    mongodb.MongoInf      `json:"mongoinf"`
 }
