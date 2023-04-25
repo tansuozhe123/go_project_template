@@ -1,6 +1,6 @@
 package apires
 
-import "go_project/pkg/commonres"
+import "go_project_template/pkg/commonres"
 
 //Api接口统一返回定义
 

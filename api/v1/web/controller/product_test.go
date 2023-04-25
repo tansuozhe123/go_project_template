@@ -2,10 +2,10 @@ package controller
 
 import (
 	"encoding/json"
-	"go_project/api/v1/web/dto"
-	"go_project/mocks"
-	"go_project/pkg/commonres"
-	"go_project/pkg/logger"
+	"go_project_template/api/v1/web/dto"
+	"go_project_template/mocks"
+	"go_project_template/pkg/commonres"
+	"go_project_template/pkg/logger"
 	"net/http/httptest"
 	"testing"
 

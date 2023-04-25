@@ -2,8 +2,8 @@ package middlewares
 
 import (
 	"fmt"
-	"go_project/pkg/commonres"
-	"go_project/pkg/logger"
+	"go_project_template/pkg/commonres"
+	"go_project_template/pkg/logger"
 	"net/http"
 	"runtime"
 

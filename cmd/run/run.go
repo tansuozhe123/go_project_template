@@ -2,11 +2,11 @@ package run
 
 import (
 	"fmt"
-	"go_project/api/router"
-	"go_project/internal/conf"
-	"go_project/internal/data/persistence"
-	"go_project/pkg/logger"
-	mongodb "go_project/pkg/mongo"
+	"go_project_template/api/router"
+	"go_project_template/internal/conf"
+	"go_project_template/internal/data/persistence"
+	"go_project_template/pkg/logger"
+	mongodb "go_project_template/pkg/mongo"
 	"os"
 
 	"github.com/gin-gonic/gin"

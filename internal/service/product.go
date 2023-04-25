@@ -1,13 +1,13 @@
 package service
 
-//go:generate mockgen -destination=../../mocks/product_service_mock.go -package=mocks go_project/internal/service ProductServiceInf
+//go:generate mockgen -destination=../../mocks/product_service_mock.go -package=mocks go_project_template/internal/service ProductServiceInf
 
 import (
-	"go_project/api/v1/web/dto"
-	"go_project/internal/biz/repository"
-	"go_project/internal/data/persistence"
-	"go_project/internal/pkg/apires"
-	"go_project/pkg/commonres"
+	"go_project_template/api/v1/web/dto"
+	"go_project_template/internal/biz/repository"
+	"go_project_template/internal/data/persistence"
+	"go_project_template/internal/pkg/apires"
+	"go_project_template/pkg/commonres"
 )
 
 type ProductServiceInf interface {

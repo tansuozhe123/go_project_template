@@ -2,7 +2,7 @@ package conf
 
 import (
 	"fmt"
-	mongodb "go_project/pkg/mongo"
+	mongodb "go_project_template/pkg/mongo"
 	"os"
 
 	"go.mongodb.org/mongo-driver/mongo/options"

@@ -1,4 +1,4 @@
-module go_project
+module go_project_template
 
 go 1.20
 

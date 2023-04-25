@@ -1,7 +1,7 @@
 package conf
 
 import (
-	mongodb "go_project/pkg/mongo"
+	mongodb "go_project_template/pkg/mongo"
 
 	"gorm.io/gorm"
 )

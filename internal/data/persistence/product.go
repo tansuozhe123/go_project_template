@@ -1,18 +1,18 @@
 package persistence
 
 import (
-	"go_project/internal/biz/entity"
-	"go_project/internal/conf"
+	"go_project_template/internal/biz/entity"
+	"go_project_template/internal/conf"
 
-	"go_project/pkg/logger"
-	mongodb "go_project/pkg/mongo"
+	"go_project_template/pkg/logger"
+	mongodb "go_project_template/pkg/mongo"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"gorm.io/gorm"
 )
 
-//go:generate mockgen -destination=../../../mocks/product_persitence_mock.go -package=mocks go_project/internal/data/persistence ProductPersitenceInf
+//go:generate mockgen -destination=../../../mocks/product_persitence_mock.go -package=mocks go_project_template/internal/data/persistence ProductPersitenceInf
 
 type ProductPersitenceInf interface {
 	GetOneProduct(productkey string) (*entity.Product, error)

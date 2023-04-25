@@ -1,8 +1,8 @@
 package persistence
 
 import (
-	"go_project/internal/conf"
-	"go_project/pkg/logger"
+	"go_project_template/internal/conf"
+	"go_project_template/pkg/logger"
 
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"

@@ -1,8 +1,8 @@
 package router
 
 import (
-	"go_project/api/v1/web/controller"
-	"go_project/internal/pkg/middlewares"
+	"go_project_template/api/v1/web/controller"
+	"go_project_template/internal/pkg/middlewares"
 
 	"github.com/gin-gonic/gin"
 )

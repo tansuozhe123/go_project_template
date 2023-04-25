@@ -14,7 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-//go:generate mockgen -destination=../../mocks/mongo_mock.go -package=mocks go_project/pkg/mongo MongoInf
+//go:generate mockgen -destination=../../mocks/mongo_mock.go -package=mocks go_project_template/pkg/mongo MongoInf
 
 type MongoInf interface {
 	FindOne(col string, filter bson.M, ops ...*options.FindOneOptions) (*mongo.SingleResult, error)

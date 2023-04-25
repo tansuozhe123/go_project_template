@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go_project/cmd/run"
-	"go_project/pkg/logger"
+	"go_project_template/cmd/run"
+	"go_project_template/pkg/logger"
 
 	"go.uber.org/zap"
 )
